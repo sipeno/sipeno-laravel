@@ -26,6 +26,6 @@ jobs:
         id: test
         env:
           APP_URL: "http://127.0.0.1:8000"
-        run: echo "::set-output name=log::$(php artisan dusk)"
+        run: php artisan dusk > output.log
       - name: Test Output
-        run: echo "${{ steps.test.output.log }}"
+        run: cat output.log
