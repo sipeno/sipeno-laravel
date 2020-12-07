@@ -23,6 +23,9 @@ jobs:
       - name: Run Laravel Server
         run: php artisan serve &
       - name: Run Dusk Tests
+        id: test
         env:
           APP_URL: "http://127.0.0.1:8000"
-        run: php artisan dusk
+        run: echo "::set-output name=log::$(php artisan dusk)"
+      - name: Test Output
+        run: echo "${{ steps.test.output.log }}"
